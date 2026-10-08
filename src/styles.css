@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-expo: cubic-bezier(0.4, 0, 1, 0.68);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  --bg-primary: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #F1F5F9;
+  --bg-subtle: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --ring: #6366F1;
+  --primary: #6366F1;
+  --primary-hover: #4F46E5;
+  --primary-soft: #EEF2FF;
+  --accent: #8B5CF6;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --destructive: #EF4444;
+  --info: #3B82F6;
+}
+
+.dark {
+  --bg-primary: #0F172A;
+  --bg-surface: #1E293B;
+  --bg-muted: #334155;
+  --bg-subtle: #475569;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --border: #334155;
+  --border-strong: #475569;
+  --primary: #818CF8;
+  --primary-hover: #6366F1;
+  --primary-soft: #1E1B4B;
+  --accent: #A78BFA;
+  --success: #34D399;
+  --warning: #FBBF24;
+  --destructive: #F87171;
+  --info: #60A5FA;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}
