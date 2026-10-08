@@ -148,6 +148,9 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 
+# Angular cache
+.angular/
+
 # Project docs (not in repo)
 CLAUDE.md
 docs/
