@@ -62,3 +62,10 @@
     color: var(--text-primary);
   }
 }
+
+.active-link {
+  background-color: var(--primary-soft);
+  border-left: 3px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
