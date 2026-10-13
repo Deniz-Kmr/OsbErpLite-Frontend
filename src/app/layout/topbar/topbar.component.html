@@ -1,0 +1,83 @@
+<header
+  class="sticky top-0 z-40 flex h-16 items-center border-b border-[var(--border)]
+         bg-[var(--bg-surface)] px-4 md:px-6"
+>
+  <!-- Left: Hamburger + Page title -->
+  <div class="flex items-center gap-3">
+    <button
+      class="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--text-secondary)]
+             transition-colors duration-150 hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] md:hidden"
+      (click)="toggleSidebar.emit()"
+      aria-label="Menüyü aç"
+    >
+      <i class="ph-light ph-list text-xl"></i>
+    </button>
+    <h2 class="text-lg font-bold text-[var(--text-primary)] md:text-xl">
+      {{ pageTitle() }}
+    </h2>
+  </div>
+
+  <!-- Right: Theme toggle + User dropdown -->
+  <div class="ml-auto flex items-center gap-2">
+    <!-- Theme toggle -->
+    <button
+      class="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--text-secondary)]
+             transition-colors duration-150 hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)]"
+      (click)="themeService.toggle()"
+      [attr.aria-label]="themeService.isDark() ? 'Açık temaya geç' : 'Koyu temaya geç'"
+    >
+      @if (themeService.isDark()) {
+        <i class="ph-light ph-sun text-xl"></i>
+      } @else {
+        <i class="ph-light ph-moon text-xl"></i>
+      }
+    </button>
+
+    <!-- User dropdown -->
+    <div class="relative">
+      <button
+        class="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors duration-150
+               hover:bg-[var(--bg-muted)]"
+        (click)="dropdownOpen = !dropdownOpen"
+        aria-haspopup="true"
+        [attr.aria-expanded]="dropdownOpen"
+      >
+        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--primary-soft)]
+                    text-xs font-semibold text-[var(--primary)]">
+          {{ userInitial }}
+        </div>
+        <i class="ph-light ph-caret-down text-sm text-[var(--text-muted)]"></i>
+      </button>
+
+      @if (dropdownOpen) {
+        <div
+          class="absolute right-0 top-full mt-1 w-56 rounded-2xl border border-[var(--border)]
+                 bg-[var(--bg-surface)] p-1.5 shadow-[0_10px_15px_rgba(0,0,0,0.06),0_4px_6px_rgba(0,0,0,0.04)]"
+        >
+          @if (currentUser; as user) {
+            <div class="px-3 py-2.5">
+              <p class="text-sm font-semibold text-[var(--text-primary)]">{{ user.username }}</p>
+              <span class="mt-0.5 inline-block rounded-full bg-[var(--primary-soft)] px-2 py-0.5
+                           text-[11px] font-medium text-[var(--primary)]">
+                {{ roleLabel }}
+              </span>
+            </div>
+            <div class="my-1 border-t border-[var(--border)]"></div>
+          }
+          <button
+            class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium
+                   text-[var(--destructive)] transition-colors duration-150
+                   hover:bg-[var(--bg-muted)]"
+            (click)="onLogout()"
+          >
+            <i class="ph-light ph-sign-out text-lg"></i>
+            <span>Çıkış Yap</span>
+          </button>
+        </div>
+
+        <!-- Backdrop for dropdown -->
+        <div class="fixed inset-0 z-[-1]" (click)="dropdownOpen = false" aria-hidden="true"></div>
+      }
+    </div>
+  </div>
+</header>
