@@ -1,1 +1,3 @@
-export {};
+export { AuthService } from './auth.service';
+export { authGuard } from './auth.guard';
+export { roleGuard } from './role.guard';
