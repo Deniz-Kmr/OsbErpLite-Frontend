@@ -151,6 +151,9 @@ vite.config.ts.timestamp-*
 # Angular cache
 .angular/
 
+# macOS
+.DS_Store
+
 # Project docs (not in repo)
 CLAUDE.md
 docs/
