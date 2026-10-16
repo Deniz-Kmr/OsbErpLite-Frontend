@@ -49,8 +49,8 @@ export class WarehouseService {
       });
   }
 
-  getAll(): Observable<ApiResponse<WarehouseDto[]>> {
-    return this.api.get<WarehouseDto[]>(this.endpoint, {
+  getAll(): Observable<ApiResponse<PaginatedList<WarehouseDto>>> {
+    return this.api.get<PaginatedList<WarehouseDto>>(this.endpoint, {
       pageNumber: 1,
       pageSize: 1000,
     });
