@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, inject, OnInit, signal } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { forkJoin } from 'rxjs';
 
 import { AuthService } from '@core/auth/auth.service';
