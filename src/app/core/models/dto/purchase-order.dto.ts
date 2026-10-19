@@ -36,3 +36,9 @@ export interface CreatePurchaseOrderRequest {
   orderDate: string;
   lines: CreatePurchaseOrderLineRequest[];
 }
+
+export interface UpdatePurchaseOrderRequest {
+  supplierId: string;
+  orderDate: string;
+  lines: CreatePurchaseOrderLineRequest[];
+}
