@@ -25,7 +25,8 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Pozisyonlar', route: '/positions', icon: 'identification-badge' },
   { label: 'Çalışanlar', route: '/employees', icon: 'user-list' },
   { label: 'İzin Talepleri', route: '/leave-requests', icon: 'calendar' },
-  { label: 'Yönetim', route: '/admin', icon: 'gear-six', roles: [UserRole.Admin] },
+  { label: 'Kullanıcılar', route: '/admin/users', icon: 'users-three', roles: [UserRole.Admin] },
+  { label: 'SAP Senkronizasyon', route: '/admin/sap', icon: 'arrows-clockwise', roles: [UserRole.Admin] },
 ];
 
 @Component({
