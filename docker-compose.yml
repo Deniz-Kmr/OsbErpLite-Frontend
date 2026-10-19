@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: osberplite-db
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+    volumes:
+      - osberplite_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - osberplite-network
+
+  api:
+    build:
+      context: ../OsbErpLite
+      dockerfile: OsbErpLite.Api/Dockerfile
+    container_name: osberplite-api
+    ports:
+      - "5019:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
+      - JwtSettings__SecretKey=${JWT_SECRET_KEY}
+      - SapSettings__ApiBaseUrl=${SAP_API_BASE_URL}
+      - SapSettings__ApiKey=${SAP_API_KEY}
+    networks:
+      - osberplite-network
+
+  frontend:
+    build:
+      context: .
+    container_name: osberplite-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - osberplite-network
+
+volumes:
+  osberplite_postgres_data:
+
+networks:
+  osberplite-network:
+    driver: bridge
