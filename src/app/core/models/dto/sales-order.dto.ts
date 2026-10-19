@@ -36,3 +36,9 @@ export interface CreateSalesOrderRequest {
   orderDate: string;
   lines: CreateSalesOrderLineRequest[];
 }
+
+export interface UpdateSalesOrderRequest {
+  customerId: string;
+  orderDate: string;
+  lines: CreateSalesOrderLineRequest[];
+}
