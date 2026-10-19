@@ -1,0 +1,72 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - osberplite_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    build:
+      context: ../OsbErpLite
+      dockerfile: OsbErpLite.Api/Dockerfile
+      target: build
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        dotnet tool install --global dotnet-ef
+        export PATH="$$PATH:/root/.dotnet/tools"
+        dotnet ef database update \
+          --project OsbErpLite.Infrastructure/OsbErpLite.Infrastructure.csproj \
+          --startup-project OsbErpLite.Api/OsbErpLite.Api.csproj
+    environment:
+      CONNECTION_STRING: Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build:
+      context: ../OsbErpLite
+      dockerfile: OsbErpLite.Api/Dockerfile
+    image: osberplite-api:fullstack
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:8080
+      CONNECTION_STRING: Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SAP_API_BASE_URL: ${SAP_API_BASE_URL:-}
+      SAP_API_KEY: ${SAP_API_KEY:-}
+    ports:
+      - "${API_PORT:-5019}:8080"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: osberplite-frontend:fullstack
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "${FRONTEND_PORT:-4200}:80"
+
+volumes:
+  osberplite_postgres_data:

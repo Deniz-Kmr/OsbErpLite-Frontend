@@ -5,11 +5,13 @@ import {
   LeaveRequestStatus,
   BusinessPartnerType,
   StockMovementType,
+  UserRole,
   OrderStatusLabel,
   EmployeeStatusLabel,
   LeaveRequestStatusLabel,
   BusinessPartnerTypeLabel,
   StockMovementTypeLabel,
+  UserRoleLabel,
 } from '@core/models/enums';
 
 type BadgeEnum =
@@ -47,6 +49,10 @@ const STATUS_STYLES: Record<string, BadgeStyle> = {
 
   [`stock-${StockMovementType.In}`]: { bg: '#D1FAE5', text: '#065F46', darkBg: '#064E3B', darkText: '#6EE7B7' },
   [`stock-${StockMovementType.Out}`]: { bg: '#FEE2E2', text: '#991B1B', darkBg: '#7F1D1D', darkText: '#FCA5A5' },
+
+  [`role-${UserRole.Admin}`]: { bg: '#F3E8FF', text: '#6B21A8', darkBg: '#581C87', darkText: '#D8B4FE' },
+  [`role-${UserRole.Manager}`]: { bg: '#DBEAFE', text: '#1E40AF', darkBg: '#1E3A5F', darkText: '#93C5FD' },
+  [`role-${UserRole.Employee}`]: { bg: '#D1FAE5', text: '#065F46', darkBg: '#064E3B', darkText: '#6EE7B7' },
 };
 
 const LABEL_MAPS: Record<string, Record<number, string>> = {
@@ -55,6 +61,7 @@ const LABEL_MAPS: Record<string, Record<number, string>> = {
   leave: LeaveRequestStatusLabel,
   partner: BusinessPartnerTypeLabel,
   stock: StockMovementTypeLabel,
+  role: UserRoleLabel,
 };
 
 @Component({
