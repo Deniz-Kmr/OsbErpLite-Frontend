@@ -17,7 +17,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class PositionService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'positions';
+  private readonly endpoint = 'Positions';
 
   private positionsSubject = new BehaviorSubject<PositionDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);

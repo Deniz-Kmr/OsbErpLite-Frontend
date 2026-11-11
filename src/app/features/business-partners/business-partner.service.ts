@@ -17,7 +17,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class BusinessPartnerService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'business-partners';
+  private readonly endpoint = 'BusinessPartners';
 
   private partnersSubject = new BehaviorSubject<BusinessPartnerDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);

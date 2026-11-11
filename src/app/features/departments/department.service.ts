@@ -18,7 +18,7 @@ import { EmployeeDto } from '@core/models/dto/employee.dto';
 @Injectable({ providedIn: 'root' })
 export class DepartmentService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'departments';
+  private readonly endpoint = 'Departments';
 
   private departmentsSubject = new BehaviorSubject<DepartmentDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);

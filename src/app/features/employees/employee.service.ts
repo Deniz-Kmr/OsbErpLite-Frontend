@@ -17,7 +17,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'employees';
+  private readonly endpoint = 'Employees';
 
   private employeesSubject = new BehaviorSubject<EmployeeDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
