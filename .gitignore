@@ -147,3 +147,14 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Angular cache
+.angular/
+
+# macOS
+.DS_Store
+
+# Project docs (not in repo)
+CLAUDE.md
+docs/
+.claude/
