@@ -17,7 +17,7 @@ import { LeaveRequestStatus } from '@core/models/enums';
 @Injectable({ providedIn: 'root' })
 export class LeaveRequestService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'leave-requests';
+  private readonly endpoint = 'LeaveRequests';
 
   private requestsSubject = new BehaviorSubject<LeaveRequestDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);

@@ -18,7 +18,7 @@ import { OrderStatus } from '@core/models/enums';
 @Injectable({ providedIn: 'root' })
 export class SalesOrderService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'sales-orders';
+  private readonly endpoint = 'SalesOrders';
 
   private ordersSubject = new BehaviorSubject<SalesOrderDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);

@@ -12,7 +12,7 @@ import { StockMovementDto } from '@core/models/dto/stock-movement.dto';
 @Injectable({ providedIn: 'root' })
 export class StockMovementService {
   private readonly api = inject(ApiService);
-  private readonly endpoint = 'stock-movements';
+  private readonly endpoint = 'StockMovements';
 
   private movementsSubject = new BehaviorSubject<StockMovementDto[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
